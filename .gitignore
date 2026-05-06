@@ -1,0 +1,51 @@
+# ── .NET ──────────────────────────────────────────────────────
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+.vs/
+*.rsuser
+*.MigrationBackup
+*.ilk
+*.meta
+*.pdb
+
+# ── Secrets & Config ──────────────────────────────────────────
+appsettings.Development.json
+appsettings.Production.json
+*.pfx
+*.p12
+.env
+.env.local
+.env.production
+
+# ── Node / React ──────────────────────────────────────────────
+optrixa-ui/node_modules/
+optrixa-ui/dist/
+optrixa-ui/.env.local
+optrixa-ui/.env.production
+optrixa-ui/coverage/
+
+# ── Docker ────────────────────────────────────────────────────
+.docker/
+
+# ── macOS ─────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# ── Logs ──────────────────────────────────────────────────────
+logs/
+*.log

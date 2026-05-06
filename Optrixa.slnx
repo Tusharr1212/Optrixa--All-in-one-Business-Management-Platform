@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Optrixa.API/Optrixa.API.csproj" />
+    <Project Path="src/Optrixa.Application/Optrixa.Application.csproj" />
+    <Project Path="src/Optrixa.Domain/Optrixa.Domain.csproj" />
+    <Project Path="src/Optrixa.Infrastructure/Optrixa.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Optrixa.Tests/Optrixa.Tests.csproj" />
+  </Folder>
+</Solution>

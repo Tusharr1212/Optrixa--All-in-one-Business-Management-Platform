@@ -1,0 +1,6 @@
+@Optrixa.API_HostAddress = http://localhost:5019
+
+GET {{Optrixa.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
