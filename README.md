@@ -309,8 +309,8 @@ Optrixa/
 
 **Tushar Purohit**
 
-- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/YOUR_PROFILE)
+- GitHub: https://github.com/Tusharr1212
+- LinkedIn: https://www.linkedin.com/in/tushar-purohit-55b33624a/
 
 
 
