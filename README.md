@@ -21,9 +21,6 @@ Optrixa is a **production-grade SaaS-style business management system** built wi
 Clean Architecture, combining Inventory Management, Expense Tracking, Sales Management,
 and Profit/Loss Analytics in one unified platform.
 
-> Built as a portfolio project demonstrating real-world full-stack development
-> with enterprise-level patterns and best practices.
-
 ---
 
 ## ✨ Features
