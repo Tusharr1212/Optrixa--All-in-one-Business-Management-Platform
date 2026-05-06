@@ -285,8 +285,6 @@ Optrixa/
 
 ## 📸 Screenshots
 
-> Add screenshots of your running application here
-
 | Dashboard | Inventory | Sales | Reports
 |---|---|---|---|
 | ![Dashboard](screenshots/dashboard.png) | ![Inventory](screenshots/inventory.png) | ![Sales](screenshots/sales.png) | ![Reports](screenshots/reports.png) |
