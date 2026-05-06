@@ -293,18 +293,6 @@ Optrixa/
 
 ---
 
-## 🗺️ Roadmap
-
-- [ ] PDF invoice generation
-- [ ] Email invoice delivery
-- [ ] AI demand forecasting
-- [ ] Multi-store support
-- [ ] Audit logs
-- [ ] Employee management
-- [ ] Mobile app (React Native)
-
----
-
 ## 👨‍💻 Author
 
 **Tushar Purohit**
