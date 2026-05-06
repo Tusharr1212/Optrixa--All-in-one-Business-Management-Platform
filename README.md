@@ -289,7 +289,7 @@ Optrixa/
 
 | Dashboard | Inventory | Sales |
 |---|---|---|
-| ![Dashboard](screenshots/dashboard.png) | ![Inventory](screenshots/inventory.png) | ![Sales](screenshots/sales.png) |
+| ![Dashboard](screenshots/dashboard.png) | ![Inventory](screenshots/inventory.png) | ![Sales](screenshots/sales.png) | ![Reports](screenshots/reports.png) |
 
 ---
 
