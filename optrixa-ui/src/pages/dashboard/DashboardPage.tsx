@@ -7,33 +7,34 @@ import {
   TrendingUp, TrendingDown, DollarSign,
   Package, ShoppingCart, AlertTriangle
 } from 'lucide-react';
-import { dashboardApi } from '../../api/dashboardApi';
+import { dashboardApi } from '../../api/dashboardApi.ts';
 import { formatCurrency } from '../../utils/formatters';
+import StatCard from '../../components/ui/StatCard.tsx';
 
-const StatCard = ({
-  title, value, icon: Icon, color, trend
-}: {
-  title: string;
-  value: string;
-  icon: any;
-  color: string;
-  trend?: string;
-}) => (
-  <div className="card p-6">
-    <div className="flex items-center justify-between mb-4">
-      <div className={`w-12 h-12 ${color} rounded-xl flex items-center justify-center`}>
-        <Icon size={22} className="text-white" />
-      </div>
-      {trend && (
-        <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">
-          {trend}
-        </span>
-      )}
-    </div>
-    <div className="text-2xl font-bold text-gray-800">{value}</div>
-    <div className="text-sm text-gray-500 mt-1">{title}</div>
-  </div>
-);
+// const StatCard = ({
+//   title, value, icon: Icon, color, trend
+// }: {
+//   title: string;
+//   value: string;
+//   icon: any;
+//   color: string;
+//   trend?: string;
+// }) => (
+//   <div className="card p-6">
+//     <div className="flex items-center justify-between mb-4">
+//       <div className={`w-12 h-12 ${color} rounded-xl flex items-center justify-center`}>
+//         <Icon size={22} className="text-white" />
+//       </div>
+//       {trend && (
+//         <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded-full">
+//           {trend}
+//         </span>
+//       )}
+//     </div>
+//     <div className="text-2xl font-bold text-gray-800">{value}</div>
+//     <div className="text-sm text-gray-500 mt-1">{title}</div>
+//   </div>
+// );
 
 const DashboardPage = () => {
   const { data, isLoading } = useQuery({
@@ -73,31 +74,39 @@ const DashboardPage = () => {
 
       {/* Stat Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard
-          title="Revenue This Month"
-          value={formatCurrency(summary?.revenueThisMonth ?? 0)}
-          icon={DollarSign}
-          color="bg-green-500"
-        />
-        <StatCard
-          title="Expenses This Month"
-          value={formatCurrency(summary?.expensesThisMonth ?? 0)}
-          icon={TrendingDown}
-          color="bg-red-500"
-        />
-        <StatCard
-          title="Profit This Month"
-          value={formatCurrency(summary?.profitThisMonth ?? 0)}
-          icon={TrendingUp}
-          color="bg-primary-500"
-        />
-        <StatCard
-          title="Total Products"
-          value={String(summary?.totalProducts ?? 0)}
-          icon={Package}
-          color="bg-purple-500"
-        />
-      </div>
+  <StatCard
+    title="Revenue This Month"
+    value={formatCurrency(summary?.revenueThisMonth ?? 0)}
+    icon={DollarSign}
+    iconBg="bg-green-100"
+    iconColor="text-green-600"
+    subtitle={`Today: ${formatCurrency(summary?.revenueToday ?? 0)}`}
+  />
+  <StatCard
+    title="Expenses This Month"
+    value={formatCurrency(summary?.expensesThisMonth ?? 0)}
+    icon={TrendingDown}
+    iconBg="bg-red-100"
+    iconColor="text-red-600"
+    subtitle={`Today: ${formatCurrency(summary?.expensesToday ?? 0)}`}
+  />
+  <StatCard
+    title="Net Profit This Month"
+    value={formatCurrency(summary?.profitThisMonth ?? 0)}
+    icon={TrendingUp}
+    iconBg="bg-indigo-100"
+    iconColor="text-indigo-600"
+    subtitle={`Today: ${formatCurrency(summary?.profitToday ?? 0)}`}
+  />
+  <StatCard
+    title="Total Products"
+    value={String(summary?.totalProducts ?? 0)}
+    icon={Package}
+    iconBg="bg-purple-100"
+    iconColor="text-purple-600"
+    subtitle={`${summary?.lowStockCount ?? 0} low stock alerts`}
+  />
+</div>
 
       {/* Second row stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
