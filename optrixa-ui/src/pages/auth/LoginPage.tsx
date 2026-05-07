@@ -120,12 +120,12 @@ const LoginPage = () => {
             </button>
           </form>
 
-          {/* Demo credentials */}
+          {/* Demo credentials
           <div className="mt-6 p-3 bg-gray-50 rounded-lg">
             <p className="text-xs text-gray-500 font-medium mb-1">Demo credentials:</p>
             <p className="text-xs text-gray-600">Email: admin@optrixa.com</p>
             <p className="text-xs text-gray-600">Password: Admin@123456</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
