@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+        // services.AddScoped<ICustomerRepository, CustomerRepository>();
         return services;
     }
 }

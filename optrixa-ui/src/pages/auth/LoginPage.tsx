@@ -73,7 +73,7 @@ const LoginPage = () => {
                 <input
                   {...register('email')}
                   type="email"
-                  placeholder="admin@optrixa.com"
+                  placeholder="*****"
                   className="input pl-10"
                 />
               </div>

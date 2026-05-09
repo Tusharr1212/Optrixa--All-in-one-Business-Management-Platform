@@ -19,14 +19,14 @@ public class GetProductByIdQueryHandler
     }
 
     public async Task<ApiResponse<ProductDto>> Handle(
-        GetProductByIdQuery request, CancellationToken cancellationToken)
-    {
-        var product = await _uow.Products.GetByIdAsync(request.Id);
+    GetProductByIdQuery request, CancellationToken cancellationToken)
+{
+    var product = await _uow.Products
+        .GetWithCategoryAndSupplierByIdAsync(request.Id);
 
-        if (product is null)
-            return ApiResponse<ProductDto>.Fail("Product not found.");
+    if (product is null)
+        return ApiResponse<ProductDto>.Fail("Product not found.");
 
-        var dto = _mapper.Map<ProductDto>(product);
-        return ApiResponse<ProductDto>.Ok(dto);
-    }
+    return ApiResponse<ProductDto>.Ok(_mapper.Map<ProductDto>(product));
+}
 }

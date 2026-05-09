@@ -5,6 +5,7 @@ using Optrixa.Application.Common;
 using Optrixa.Application.Features.Auth.DTOs;
 using Optrixa.Domain.Entities;
 using Optrixa.Infrastructure.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Optrixa.API.Controllers;
 
@@ -51,4 +52,35 @@ public class AuthController : ControllerBase
 
         return Ok(ApiResponse<AuthResponseDto>.Ok(response, "Login successful."));
     }
+    [HttpPost("register")]
+[Authorize(Roles = "Admin")]  // Only admins can create new users
+public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+{
+    var existingUser = await _userManager.FindByEmailAsync(dto.Email);
+    if (existingUser is not null)
+        return BadRequest(ApiResponse<AuthResponseDto>.Fail(
+            "A user with this email already exists."));
+
+    var user = new OptrixaUser
+    {
+        UserName = dto.Email,
+        Email = dto.Email,
+        FullName = dto.FullName,
+        IsActive = true
+    };
+
+    var result = await _userManager.CreateAsync(user, dto.Password);
+    if (!result.Succeeded)
+    {
+        var errors = result.Errors.Select(e => e.Description).ToList();
+        return BadRequest(ApiResponse<AuthResponseDto>.Fail(
+            "Registration failed.", errors));
+    }
+
+    var role = dto.Role == "Admin" ? "Admin" : "Employee";
+    await _userManager.AddToRoleAsync(user, role);
+
+    return Ok(ApiResponse<bool>.Ok(true,
+        $"User {dto.FullName} created successfully as {role}."));
+}
 }

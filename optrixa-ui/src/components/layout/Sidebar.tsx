@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard, Package, Receipt,
-  ShoppingCart, BarChart3, Settings, Zap, Tag
+  ShoppingCart, BarChart3, Settings,
+  Zap, Tag, Truck, Users
 } from 'lucide-react';
 
 const navItems = [
@@ -9,6 +10,8 @@ const navItems = [
   { to: '/inventory',  icon: Package,          label: 'Inventory'  },
   { to: '/expenses',   icon: Receipt,           label: 'Expenses'   },
   { to: '/sales',      icon: ShoppingCart,      label: 'Sales'      },
+  { to: '/customers',  icon: Users,             label: 'Customers'  },
+  { to: '/suppliers',  icon: Truck,             label: 'Suppliers'  },
   { to: '/categories', icon: Tag,               label: 'Categories' },
   { to: '/reports',    icon: BarChart3,          label: 'Reports'    },
 ];
@@ -23,7 +26,7 @@ const Sidebar = () => {
         <span className="text-xl font-bold tracking-tight">Optrixa</span>
       </div>
 
-      <nav className="flex-1 px-3 py-4 space-y-1">
+      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
         {navItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}

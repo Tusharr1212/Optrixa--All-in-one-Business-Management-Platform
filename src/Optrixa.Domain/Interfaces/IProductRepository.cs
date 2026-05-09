@@ -9,4 +9,5 @@ public interface IProductRepository : IRepository<Product>
     Task<IEnumerable<Product>> GetLowStockProductsAsync();
     Task<IEnumerable<Product>> GetWithCategoryAndSupplierAsync();
     Task<bool> IsSkuUniqueAsync(string sku, int? excludeId = null);
+    Task<Product?> GetWithCategoryAndSupplierByIdAsync(int id);
 }

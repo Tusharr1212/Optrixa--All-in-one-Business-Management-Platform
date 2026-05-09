@@ -33,4 +33,10 @@ public class ProductRepository : Repository<Product>, IProductRepository
             query = query.Where(x => x.Id != excludeId.Value);
         return !await query.AnyAsync();
     }
+
+    public async Task<Product?> GetWithCategoryAndSupplierByIdAsync(int id) =>
+    await _dbSet
+        .Include(x => x.Category)
+        .Include(x => x.Supplier)
+        .FirstOrDefaultAsync(x => x.Id == id);
 }

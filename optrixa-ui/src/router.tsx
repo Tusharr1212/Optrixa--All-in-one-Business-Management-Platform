@@ -9,6 +9,8 @@ import SalesPage from './pages/sales/SalesPage';
 import ReportsPage from './pages/reports/ReportsPage';
 import SettingsPage from './pages/settings/SettingsPage';
 import CategoriesPage from './pages/categories/CategoriesPage';
+import SuppliersPage from './pages/suppliers/SuppliersPage';
+import CustomersPage from './pages/customers/CustomersPage';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
@@ -25,14 +27,16 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { index: true,          element: <Navigate to="/dashboard" replace /> },
-      { path: 'dashboard',    element: <DashboardPage /> },
-      { path: 'inventory',    element: <ProductsPage /> },
-      { path: 'expenses',     element: <ExpensesPage /> },
-      { path: 'sales',        element: <SalesPage /> },
-      { path: 'reports',      element: <ReportsPage /> },
-      { path: 'categories',   element: <CategoriesPage /> },
-      { path: 'settings',     element: <SettingsPage /> },
+      { index: true,         element: <Navigate to="/dashboard" replace /> },
+      { path: 'dashboard',   element: <DashboardPage /> },
+      { path: 'inventory',   element: <ProductsPage /> },
+      { path: 'expenses',    element: <ExpensesPage /> },
+      { path: 'sales',       element: <SalesPage /> },
+      { path: 'customers',   element: <CustomersPage /> },
+      { path: 'suppliers',   element: <SuppliersPage /> },
+      { path: 'categories',  element: <CategoriesPage /> },
+      { path: 'reports',     element: <ReportsPage /> },
+      { path: 'settings',    element: <SettingsPage /> },
     ],
   },
 ]);

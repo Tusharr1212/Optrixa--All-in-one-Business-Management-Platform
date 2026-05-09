@@ -21,22 +21,31 @@ public class CreateProductCommandHandler
     }
 
     public async Task<ApiResponse<ProductDto>> Handle(
-        CreateProductCommand request, CancellationToken cancellationToken)
+    CreateProductCommand request, CancellationToken cancellationToken)
+{
+    var skuExists = await _uow.Products.IsSkuUniqueAsync(request.Dto.SKU);
+    if (!skuExists)
+        return ApiResponse<ProductDto>.Fail("A product with this SKU already exists.");
+
+    var product = new Product
     {
-        // 1. Business rule: SKU must be unique
-        var skuExists = await _uow.Products.IsSkuUniqueAsync(request.Dto.SKU);
-        if (!skuExists)
-            return ApiResponse<ProductDto>.Fail("A product with this SKU already exists.");
+        Name = request.Dto.Name,
+        SKU = request.Dto.SKU,
+        Description = request.Dto.Description,
+        CategoryId = request.Dto.CategoryId,
+        SupplierId = request.Dto.SupplierId,
+        CostPrice = request.Dto.CostPrice,
+        SellingPrice = request.Dto.SellingPrice,
+        StockQuantity = request.Dto.StockQuantity,
+        LowStockThreshold = request.Dto.LowStockThreshold,
+    };
 
-        // 2. Map DTO → Entity
-        var product = _mapper.Map<Product>(request.Dto);
+    await _uow.Products.AddAsync(product);
+    await _uow.SaveChangesAsync();
 
-        // 3. Persist
-        await _uow.Products.AddAsync(product);
-        await _uow.SaveChangesAsync();
-
-        // 4. Return the created product as a DTO
-        var productDto = _mapper.Map<ProductDto>(product);
-        return ApiResponse<ProductDto>.Ok(productDto, "Product created successfully.");
-    }
+    // Reload with category and supplier included
+    var created = await _uow.Products.GetWithCategoryAndSupplierByIdAsync(product.Id);
+    var productDto = _mapper.Map<ProductDto>(created);
+    return ApiResponse<ProductDto>.Ok(productDto, "Product created successfully.");
+}
 }

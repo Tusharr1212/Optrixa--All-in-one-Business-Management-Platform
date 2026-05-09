@@ -8,6 +8,7 @@ public interface IUnitOfWork : IDisposable
     IExpenseRepository Expenses { get; }
     IRepository<Domain.Entities.StockMovement> StockMovements { get; }
     IRepository<Domain.Entities.Customer> Customers { get; }
+    // ICustomerRepository Customers { get; }
     Task<int> SaveChangesAsync();
     Task BeginTransactionAsync();
     Task CommitTransactionAsync();
