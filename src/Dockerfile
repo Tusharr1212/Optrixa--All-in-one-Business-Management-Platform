@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy ONLY backend source (src)
-COPY src/ ./src/
+COPY . .
 
 # Restore using PROJECT FILE (NOT .sln)
 RUN dotnet restore src/Optrixa.API/Optrixa.API.csproj
