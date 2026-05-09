@@ -5,6 +5,7 @@ WORKDIR /src
 # copy solution + all projects
 COPY . .
 
+RUN ls -R
 # restore solution (important: root level .sln)
 RUN dotnet restore Optrixa.sln
 
