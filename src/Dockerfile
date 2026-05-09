@@ -1,23 +1,18 @@
-# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+WORKDIR /app
 
-# Copy solution and all projects
-COPY . .
+# Copy ONLY backend source (src)
+COPY src/ ./src/
 
-# Restore solution (IMPORTANT)
-RUN dotnet restore Optrixa.sln
+# Restore using PROJECT FILE (NOT .sln)
+RUN dotnet restore src/Optrixa.API/Optrixa.API.csproj
 
-# Build & publish API only
-RUN dotnet publish src/Optrixa.API/Optrixa.API.csproj -c Release -o /app/publish
+# Publish API
+RUN dotnet publish src/Optrixa.API/Optrixa.API.csproj -c Release -o /publish
 
-# Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
-COPY --from=build /app/publish .
-
-EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
+COPY --from=build /publish .
 
 ENTRYPOINT ["dotnet", "Optrixa.API.dll"]
