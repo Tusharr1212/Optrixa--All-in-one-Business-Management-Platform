@@ -8,6 +8,10 @@ export interface Expense {
   receiptUrl?: string;
   expenseDate: string;
   createdAt: string;
+  supplierId?: number;
+  supplierName?: string;
+  isPaid: boolean;
+  paidAt?: string;
 }
 
 export interface CreateExpenseDto {
@@ -17,6 +21,8 @@ export interface CreateExpenseDto {
   amount: number;
   receiptUrl?: string;
   expenseDate: string;
+  supplierId?: number;
+  isPaid: boolean;
 }
 
 export interface UpdateExpenseDto extends CreateExpenseDto {

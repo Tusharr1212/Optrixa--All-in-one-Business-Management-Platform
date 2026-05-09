@@ -18,7 +18,11 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // ── Controllers + Swagger ──────────────────────────────────────────────────
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+    {
+        x.JsonSerializerOptions.ReferenceHandler =
+            System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -52,6 +56,7 @@ builder.Services.AddSwaggerGen(c =>
 // ── Application + Infrastructure Layers ───────────────────────────────────
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
 
 // ── JWT Authentication ─────────────────────────────────────────────────────
 var tokenSettings = builder.Configuration.GetSection("TokenSettings");

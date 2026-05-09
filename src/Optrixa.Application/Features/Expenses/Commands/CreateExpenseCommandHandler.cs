@@ -1,4 +1,3 @@
-// Features/Expenses/Commands/CreateExpenseCommandHandler.cs
 using AutoMapper;
 using MediatR;
 using Optrixa.Application.Common;
@@ -31,10 +30,30 @@ public class CreateExpenseCommandHandler
             Amount = request.Dto.Amount,
             ReceiptUrl = request.Dto.ReceiptUrl,
             ExpenseDate = request.Dto.ExpenseDate,
-            UserId = request.UserId
+            UserId = request.UserId,
+            SupplierId = request.Dto.SupplierId,
+            IsPaid = request.Dto.IsPaid,
+            PaidAt = request.Dto.IsPaid ? DateTime.UtcNow : null
         };
 
         await _uow.Expenses.AddAsync(expense);
+
+        // Update supplier balance
+        if (request.Dto.SupplierId.HasValue)
+        {
+            var supplier = await _uow.Suppliers
+                .GetByIdAsync(request.Dto.SupplierId.Value);
+
+            if (supplier is not null)
+            {
+                supplier.TotalPurchased += request.Dto.Amount;
+                if (request.Dto.IsPaid)
+                    supplier.TotalPaid += request.Dto.Amount;
+                supplier.UpdatedAt = DateTime.UtcNow;
+                await _uow.Suppliers.UpdateAsync(supplier);
+            }
+        }
+
         await _uow.SaveChangesAsync();
 
         var dto = _mapper.Map<ExpenseDto>(expense);

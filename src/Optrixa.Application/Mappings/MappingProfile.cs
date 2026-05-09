@@ -20,8 +20,10 @@ public class MappingProfile : Profile
 
         // Expense
         CreateMap<Expense, ExpenseDto>()
-            .ForMember(d => d.CategoryName, o => o.MapFrom(s => s.Category != null ? s.Category.Name : string.Empty));
-        CreateMap<CreateExpenseDto, Expense>();
+    .ForMember(d => d.CategoryName,
+        o => o.MapFrom(s => s.Category != null ? s.Category.Name : string.Empty))
+    .ForMember(d => d.SupplierName,
+        o => o.MapFrom(s => s.Supplier != null ? s.Supplier.Name : null));
 
         // Sale
         CreateMap<Sale, SaleDto>()

@@ -12,6 +12,7 @@ public class UnitOfWork : IUnitOfWork
     public IProductRepository Products { get; }
     public ISaleRepository Sales { get; }
     public IExpenseRepository Expenses { get; }
+    public ISupplierRepository Suppliers { get; }
     public IRepository<StockMovement> StockMovements { get; }
     public IRepository<Customer> Customers { get; }
 
@@ -20,6 +21,7 @@ public class UnitOfWork : IUnitOfWork
         IProductRepository products,
         ISaleRepository sales,
         IExpenseRepository expenses,
+        ISupplierRepository suppliers,
         IRepository<StockMovement> stockMovements,
         IRepository<Customer> customers)
     {
@@ -27,6 +29,7 @@ public class UnitOfWork : IUnitOfWork
         Products = products;
         Sales = sales;
         Expenses = expenses;
+        Suppliers = suppliers;
         StockMovements = stockMovements;
         Customers = customers;
     }

@@ -1,4 +1,3 @@
-// Features/Expenses/DTOs/ExpenseDto.cs
 namespace Optrixa.Application.Features.Expenses.DTOs;
 
 public class ExpenseDto
@@ -12,4 +11,10 @@ public class ExpenseDto
     public string? ReceiptUrl { get; set; }
     public DateTime ExpenseDate { get; set; }
     public DateTime CreatedAt { get; set; }
+
+    // Supplier
+    public int? SupplierId { get; set; }
+    public string? SupplierName { get; set; }
+    public bool IsPaid { get; set; }
+    public DateTime? PaidAt { get; set; }
 }

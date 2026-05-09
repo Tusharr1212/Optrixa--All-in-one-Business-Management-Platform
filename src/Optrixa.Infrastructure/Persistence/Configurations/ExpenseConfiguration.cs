@@ -16,5 +16,11 @@ public class ExpenseConfiguration : IEntityTypeConfiguration<Expense>
             .WithMany(x => x.Expenses)
             .HasForeignKey(x => x.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // Supplier relationship
+        builder.HasOne(x => x.Supplier)
+            .WithMany(x => x.Expenses)
+            .HasForeignKey(x => x.SupplierId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }
