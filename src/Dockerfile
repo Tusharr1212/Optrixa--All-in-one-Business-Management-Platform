@@ -1,13 +1,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy ONLY backend source (src)
+# COPY FULL REPO (critical fix)
 COPY . .
 
-# Restore using PROJECT FILE (NOT .sln)
-RUN dotnet restore src/Optrixa.API/Optrixa.API.csproj
+# Restore using solution (now it WILL exist)
+RUN dotnet restore Optrixa.sln
 
-# Publish API
+# Publish ONLY API project
 RUN dotnet publish src/Optrixa.API/Optrixa.API.csproj -c Release -o /publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
