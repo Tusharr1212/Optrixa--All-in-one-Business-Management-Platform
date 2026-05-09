@@ -4,4 +4,7 @@ using Optrixa.Application.Common;
 
 namespace Optrixa.Application.Features.Dashboard.Queries;
 
-public record GetDashboardSummaryQuery : IRequest<ApiResponse<DashboardSummaryDto>>;
+public record GetDashboardSummaryQuery(
+    DateTime? FromDate = null,
+    DateTime? ToDate = null)
+    : IRequest<ApiResponse<DashboardSummaryDto>>;

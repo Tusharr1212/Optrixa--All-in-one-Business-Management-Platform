@@ -60,3 +60,20 @@ export interface LowStockProduct {
   stockQuantity: number;
   lowStockThreshold: number;
 }
+
+export interface DailyDataPoint {
+  day: number;
+  date: string;
+  dayName: string;
+  revenue: number;
+  expenses: number;
+  profit: number;
+}
+
+export interface DailyBreakdownDto {
+  month: string;
+  days: DailyDataPoint[];
+  totalRevenue: number;
+  totalExpenses: number;
+  totalProfit: number;
+}
