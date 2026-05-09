@@ -1,18 +1,22 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+WORKDIR /src
 
-# COPY FULL REPO (critical fix)
+# Copy everything
 COPY . .
 
-# Restore using solution (now it WILL exist)
-RUN dotnet restore Optrixa.sln
+# Restore ONLY API project (critical fix)
+RUN dotnet restore src/Optrixa.API/Optrixa.API.csproj
 
-# Publish ONLY API project
-RUN dotnet publish src/Optrixa.API/Optrixa.API.csproj -c Release -o /publish
+# Build + publish API
+RUN dotnet publish src/Optrixa.API/Optrixa.API.csproj -c Release -o /app/publish
 
+# Runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
-COPY --from=build /publish .
+COPY --from=build /app/publish .
+
+ENV ASPNETCORE_URLS=http://+:10000
+EXPOSE 10000
 
 ENTRYPOINT ["dotnet", "Optrixa.API.dll"]
